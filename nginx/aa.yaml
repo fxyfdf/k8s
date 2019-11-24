@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: my-depoy
+  name: my-depoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: my-depoy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: my-depoy
+    spec:
+      containers:
+      - image: hub.kce.ksyun.com/kbdp/nginx:1.0
+        name: my-depoy
+        resources: {}
+status: {}

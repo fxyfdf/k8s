@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: nginx-pod2
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: hub.kce.ksyun.com/kbdp/nginx:1.0 
+    ports:
+    - name: http
+      containerPort: 80
+      hostIP: 0.0.0.0
+      hostPort: 89
+      protocol: TCP
+    - name: https
+      containerPort: 443
+      hostIP: 0.0.0.0
+      hostPort: 443
+      protocol: TCP

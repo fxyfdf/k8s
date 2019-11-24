@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+
+spec:
+  containers:
+  - image: hub.kce.ksyun.com/ksyun/busybox:mp
+    command:
+    - sleep
+    - "36000"
+    imagePullPolicy: IfNotPresent
+    name: busybox
+  restartPolicy: Always

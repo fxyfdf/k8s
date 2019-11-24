@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: hpa
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-hpa
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 0.01
+            memory: 25Mi
+          limits:
+            cpu: 0.05
+            memory: 60Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: hpa
+  labels:
+    app: nginx-hpa
+spec:
+  selector:
+    app: nginx-hpa
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30030

@@ -1,0 +1,4 @@
+FROM nginx:4.0
+
+ADD 2.yaml /
+ 

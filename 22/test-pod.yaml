@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-pod
+    image: hub.kce.ksyun.com/ksyun/busybox:mp
+    imagePullPolicy: IfNotPresent
+    command:
+    - "/bin/sh"
+    args:
+    - "-c"
+    - "touch /mnt/SUCCESS && exit 0 || exit 1"
+    volumeMounts:
+    - name: nfs-pvc
+      mountPath: "/mnt"
+  imagePullSecrets:
+  - name: myregistrykey
+  restartPolicy: "Never"
+  volumes:
+  - name: nfs-pvc
+    persistentVolumeClaim:
+      claimName: test-pvc

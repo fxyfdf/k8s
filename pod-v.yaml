@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-test
+  labels:
+    os: centos
+spec:
+  containers:
+  #第一个容器
+  - name: hello-write
+    image: hub.kce.ksyun.com/kbdp/centos:latest
+    #优先使用本地镜像
+    imagePullPolicy: Never
+    #设置环境变量
+    env: 
+    - name: Test
+      value: "123456"
+    #执行的命令
+    command: ["bash","-c","for i in {1..10000};do echo $i >>/data/hello ;sleep 1 ; done"]
+    volumeMounts:
+      - name: data
+        mountPath: /data
+  #重启策略 
+  ###restartPolicy: Always
+  #第二个容器
+  - name: hello-read
+    image: hub.kce.ksyun.com/kbdp/centos:latest
+    #优先使用本地镜像
+    imagePullPolicy: Never
+    #设置环境变量
+    env: 
+    - name: Test
+      value: "123456"
+    #执行的命令
+    command: ["bash","-c","for i in {1..10000};do cat /data/hello | tail -n1; sleep 1 ; done"]
+    #挂载本地磁盘
+    volumeMounts:
+      - name: data
+        mountPath: /data
+  #重启策略 
+  restartPolicy: Always
+  #数据卷
+  volumes:
+  - name: data
+    hostPath:
+      path: /mnt
