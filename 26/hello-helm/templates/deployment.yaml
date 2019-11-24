@@ -19,10 +19,13 @@ spec:
         app.kubernetes.io/name: {{ include "hello-helm.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      imagePullSecrets:
+      - name: ksyunregistrykey24
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.image.repository }}:1.0"
+          imagePullPolicy: Never
+          #imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
