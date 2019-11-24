@@ -5,17 +5,17 @@ metadata:
   name: traefik-ingress-controller-24
   namespace: kube-system
   labels:
-    k8s-app: traefik-ingress-lb
+    k8s-app: traefik-ingress-lb-24
 spec:
   replicas: 1
   selector:
     matchLabels:
-      k8s-app: traefik-ingress-lb
+      k8s-app: traefik-ingress-lb-24
   template:
     metadata:
       labels:
-        k8s-app: traefik-ingress-lb
-        name: traefik-ingress-lb
+        k8s-app: traefik-ingress-lb-24
+        name: traefik-ingress-lb-24
     spec:
       serviceAccountName: traefik-ingress-controller-24
       terminationGracePeriodSeconds: 60
@@ -26,8 +26,8 @@ spec:
       imagePullSecrets:
       - name: ksyunregistrykey24
       containers:
-      - image: hub.kce.ksyun.com/kbdp/traefik:latest
-        name: traefik-ingress-lb
+      - image: hub.kce.ksyun.com/kbdp/traefik:v1.6.5-mp
+        name: traefik-ingress-lb-24
         ports:
         - name: http
           containerPort: 88
@@ -45,7 +45,7 @@ metadata:
   namespace: kube-system
 spec:
   selector:
-    k8s-app: traefik-ingress-lb
+    k8s-app: traefik-ingress-lb-24
   ports:
     - protocol: TCP
       port: 88

@@ -1,0 +1,12 @@
+helm: /usr/local/bin/helm
+[root@vm10-66-0-140 26]# vim helm-install.txt 
+
+cp helm /usr/local/bin/helm
+
+
+helm version
+
+¿¿ Helm ¿¿¿¿gcr.io¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+helm init --upgrade --tiller-image cnych/tiller:v2.10.0
+
+helm create hello-helm
