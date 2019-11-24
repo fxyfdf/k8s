@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: nfs-web
+  name: nfs-web-22
 spec:
   serviceName: "nginx"  #声明它属于哪个Headless Service.
   replicas: 3
@@ -13,13 +13,15 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: nginx:1.7.9
+        image: hub.kce.ksyun.com/kbdp/nginx:1.0
         ports:
         - containerPort: 80
           name: web
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
+      imagePullSecrets:
+      - name: myregistrykey
   volumeClaimTemplates:
   - metadata:
       name: www
