@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deploy-23
+  labels:
+    k8s-app: nginx-demo-23
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx-23
+    spec:
+      containers:
+      - name: nginx-23
+        image: hub.kce.ksyun.com/kbdp/nginx:1.0
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: myregistrykey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service-23
+  labels:
+    name: nginx-service-23
+spec:
+  ports:
+  - port: 5000
+    targetPort: 80
+  selector:
+    app: nginx-23
