@@ -1,0 +1,33 @@
+[debug] Created tunnel using local port: '23925'
+
+[debug] SERVER: "127.0.0.1:23925"
+
+[debug] Original chart version: ""
+[debug] CHART PATH: /data/lpf/29/test
+
+NAME:   gangly-angelfish
+REVISION: 1
+RELEASED: Mon Nov 25 18:21:22 2019
+CHART: test-0.1.0
+USER-SUPPLIED VALUES:
+{}
+
+COMPUTED VALUES:
+course:
+  k8s: devops
+  python: django
+
+HOOKS:
+MANIFEST:
+
+---
+# Source: test/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gangly-angelfish-configmap
+data:
+  myvalues: "Hello World"
+  #k8s: "devops"
+  k8s: "DEVOPS"
+  python: "djangodjangodjango"
